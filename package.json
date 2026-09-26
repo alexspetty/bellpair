@@ -1,0 +1,21 @@
+{
+  "name": "bellpair",
+  "version": "0.2.0",
+  "private": true,
+  "type": "module",
+  "description": "A reflection-pair work puzzle with a C/GMP engine and independent verifier",
+  "scripts": {
+    "start": "node server.mjs",
+    "test": "make test",
+    "bench": "make bench"
+  },
+  "engines": {
+    "node": ">=22"
+  },
+  "license": "MIT",
+  "author": "Alexander S. Petty",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/alexspetty/bellpair.git"
+  }
+}

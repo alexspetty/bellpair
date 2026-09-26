@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#182e34">
+  <title>Bellpair · A proof takes two</title>
+  <link rel="icon" href="/mark.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/style.css"><script src="/app.js" type="module"></script>
+</head>
+<body>
+  <header class="masthead wrap">
+    <a class="brand" href="/" aria-label="Bellpair home"><img src="/mark.svg" alt="" width="36" height="36"><span data-brand>Bellpair</span></a>
+    <nav aria-label="Page"><a href="#table">The arithmetic</a><a href="#measurements">Measurements</a></nav>
+    <span class="local"><i></i> Local prototype</span>
+  </header>
+  <main class="wrap">
+    <section class="intro">
+      <div><p class="eyebrow">An experiment in paired work</p><h1>A proof takes <em>two.</em></h1></div>
+      <p class="intro-copy">Two prime contributions. <br>A shared challenge. <br>One receipt you can check.</p>
+    </section>
+    <section class="workspace" aria-label="Proof laboratory">
+      <form class="composer" id="challenge-form">
+        <div class="section-label"><span>01</span> Set the challenge</div>
+        <h2>Make it yours.</h2>
+        <p class="muted">The work is bound to your message and a fresh challenge.</p>
+        <label for="base">Number base</label>
+        <select id="base" disabled></select><p class="field-note" id="base-note"></p>
+        <label for="payload">Your message</label>
+        <textarea id="payload" rows="3" maxlength="500">A small piece of work, made verifiable.</textarea>
+        <label for="difficulty">Search difficulty</label>
+        <select id="difficulty"><option value="6">Quick · 6 bits</option><option value="8" selected>Standard · 8 bits</option><option value="10">Patient · 10 bits</option><option value="12">Longer · 12 bits</option></select>
+        <p class="field-note">Each added bit roughly doubles the expected search. Completion time varies.</p>
+        <button class="primary" id="find" type="submit" disabled>Find a pair <span aria-hidden="true">↗</span></button>
+        <button class="text-button" id="cancel" type="button" hidden>Cancel search</button>
+        <div class="search-state"><span class="status-dot" id="status-dot"></span><span id="status">Connecting to the local solver…</span></div>
+        <p class="limits">Runs on this computer. At most four worker threads and 30 seconds per search.</p>
+      </form>
+      <div class="proof-panel">
+        <div class="panel-top"><div class="section-label"><span>02</span> Find both contributions</div><span class="pill" id="pair-status">Ready when you are</span></div>
+        <div class="pair-stage">
+          <article class="contribution" id="share-a">
+            <div class="role"><span class="small-label">First contribution</span><span class="found-label">Searching</span></div>
+            <div class="residue" id="residue-a">09</div>
+            <div class="contribution-weight"><span id="weight-a">+17</span><span>centered weight</span></div>
+            <div class="prime-box"><span class="small-label">Prime ending in <span id="ending-a">09</span></span><strong id="prime-a">Waiting for work</strong></div>
+          </article>
+          <div class="balance-stage"><div class="bridge" aria-hidden="true"></div><div class="balance-disc"><span class="small-label">Balance</span><strong id="balance">—</strong></div><span class="balance-caption" id="balance-caption">Both halves required</span></div>
+          <article class="contribution counterpart" id="share-b">
+            <div class="role"><span class="small-label">Matching contribution</span><span class="found-label">Searching</span></div>
+            <div class="residue" id="residue-b">91</div>
+            <div class="contribution-weight"><span id="weight-b">−17</span><span>centered weight</span></div>
+            <div class="prime-box"><span class="small-label">Prime ending in <span id="ending-b">91</span></span><strong id="prime-b">Waiting for work</strong></div>
+          </article>
+        </div>
+        <p class="stage-note">The last two digits in the chosen base select an entry in the collision table. Its reflected partner supplies the opposite centered weight.</p>
+        <div class="receipt" id="receipt-section">
+          <div class="receipt-heading"><div class="section-label"><span>03</span> Check the receipt</div><span id="receipt-state" class="muted">Complete the pair first</span></div>
+          <div class="metrics"><div><span>Attempts</span><strong id="attempts">—</strong></div><div><span>Search time</span><strong id="duration">—</strong></div><div><span>Verification</span><strong id="verify-time">—</strong></div></div>
+          <div class="receipt-actions"><button id="verify" class="secondary" disabled>Verify independently</button><button id="redeem" class="secondary" disabled>Redeem once</button><button id="download" class="text-button" disabled>↓ Receipt</button></div>
+          <p id="receipt-message" class="receipt-message" role="status" aria-live="polite">Verification checks both hashes, both primes and the selected pair.</p>
+          <details id="receipt-details" hidden><summary>View proof details</summary><pre id="receipt-json"></pre></details>
+        </div>
+      </div>
+    </section>
+    <section class="arithmetic" id="table">
+      <div class="explanation"><p class="eyebrow">The collision periodic table</p><h2>Different endings.<br>Exact counterparts.</h2><p>Every eligible ending in the chosen base has a reflected partner. The paper’s fingerprints add to −1. Centering and doubling those entries gives opposite integers.</p><p class="example" id="example">09 → +17 &nbsp; / &nbsp; 91 → −17</p><p class="muted">Each new challenge moves to the next of <span id="pair-count">20</span> pairs. Completing a pair makes its contribution balance exactly.</p></div>
+      <div class="table-panel"><div class="table-heading"><span id="table-count">40 eligible endings · base 10</span><span>Ending <b>·</b> centered weight</span></div><div class="collision-table" id="collision-table" aria-label="Collision table"></div><p class="table-note">The selected pair is highlighted. Endings sharing a factor with the selected base are excluded.</p></div>
+    </section>
+    <section class="measurements" id="measurements">
+      <div class="measure-heading"><div><p class="eyebrow">Measure before claiming</p><h2>What does the extra work cost?</h2></div><p>Recorded on the development machine. Each trial produces two contributions at the same hash difficulty. Extra filters require more searching.</p></div>
+      <div id="benchmark" class="benchmark"><p class="muted">Loading the recorded benchmark…</p></div>
+    </section>
+    <section class="principles"><article><span>01 / Arithmetic</span><h3>Exact pair balance.</h3><p>The reflection identity is the completion rule. It comes directly from the collision table.</p></article><article><span>02 / Verification</span><h3>Check, then redeem.</h3><p>A separate verifier checks the work. The local server accepts each issued receipt once.</p></article><article><span>03 / Research</span><h3>A starting point.</h3><p>This measures a protocol idea. Added security or efficiency over ordinary hash work has not been established.</p></article></section>
+  </main>
+  <footer class="wrap"><a class="brand" href="/"><img src="/mark.svg" width="25" height="25" alt=""><span data-brand>Bellpair</span></a><p>Paired arithmetic. The name draws on quantum entanglement.</p><span>Prototype 0.2 · Local only</span></footer>
+</body></html>

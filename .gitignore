@@ -1,0 +1,13 @@
+build/
+node_modules/
+experiments/artifacts/
+*.log
+.DS_Store
+
+# Private provisional application and filing preparation.
+/patents/
+
+# Local environment settings.
+.env
+.env.*
+!.env.example
