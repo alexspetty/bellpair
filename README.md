@@ -8,7 +8,9 @@ The name draws on quantum entanglement. The implementation uses classical arithm
 
 This version is being released as research software under the [MIT license](LICENSE). Its value is a working, inspectable experiment: exact arithmetic, a native solver, a separate verifier, a local browser lab, and reproducible checks.
 
-We have not demonstrated a compelling commercial application or a security or efficiency advantage over ordinary work puzzles. Further development should follow a concrete use case and measurements against an appropriate baseline. The experiment remains available for others to run, adapt and investigate; there is no token or investment offering.
+Use the lab to compare arithmetic work rules, inspect receipts, teach challenge-response protocols, or prototype work requirements for forms, automated clients and job submissions. The solver, verifier and protocol are available to adapt to your own experiments. See [applications and experiments](docs/APPLICATIONS.md) for concrete starting points.
+
+The current release focuses on a reproducible local workflow. [Security scope](SECURITY.md) documents the implementation and deployment boundaries.
 
 ## Run it
 
@@ -61,6 +63,7 @@ The first run averaged about **1.27 seconds per paired-prime receipt** across di
 
 ## Read next
 
+- [Applications and experiments](docs/APPLICATIONS.md): useful things to try and questions to measure.
 - [Protocol](docs/PROTOCOL.md): exact message bytes, receipt format, verification and API.
 - [Mathematical basis](docs/MATHEMATICAL_BASIS.md): the finite reflection identity and the limits of the original chain proposal.
 - [Security scope](SECURITY.md): current guarantees, assumptions, resource limits and deployment gaps.
